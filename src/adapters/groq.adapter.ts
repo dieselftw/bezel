@@ -3,6 +3,7 @@ import { BaseAdapter } from './base.adapter';
 import { LLMConfig } from '../types/config.types';
 import { Prompt } from '../prompts/extractor';
 import { ZodSchema } from 'zod';
+import { SchemaConverter } from '../utils/zod-to-json';
 
 export class GroqAdapter extends BaseAdapter {
   private client: Groq;
@@ -14,6 +15,8 @@ export class GroqAdapter extends BaseAdapter {
 
   async generate(prompt: string, schema: ZodSchema): Promise<string> {
     try {
+      const convertedSchema = SchemaConverter.zodToString(schema);
+      console.log(prompt + convertedSchema)
       const response = await this.client.chat.completions.create({
         model: this.config.model || 'llama3-8b-8192',
         messages: [
@@ -21,11 +24,13 @@ export class GroqAdapter extends BaseAdapter {
             role: 'system',
             content: Prompt.SYSTEM_PROMPT
           },
-          { role: 'user', content: prompt + schema}
+          { role: 'user', content: prompt + convertedSchema}
         ],
         temperature: this.config.temperature || 0.1,
         response_format: { type: 'json_object' }
       });
+
+      console.log(response.choices[0].message.content)
 
       return response.choices[0].message.content || '';
     } catch (error) {
