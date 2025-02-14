@@ -16,7 +16,6 @@ export class GroqAdapter extends BaseAdapter {
   async generate(prompt: string, schema: ZodSchema): Promise<string> {
     try {
       const convertedSchema = SchemaConverter.zodToString(schema);
-      console.log(prompt + convertedSchema)
       const response = await this.client.chat.completions.create({
         model: this.config.model || 'llama3-8b-8192',
         messages: [
@@ -29,8 +28,6 @@ export class GroqAdapter extends BaseAdapter {
         temperature: this.config.temperature || 0.1,
         response_format: { type: 'json_object' }
       });
-
-      console.log(response.choices[0].message.content)
 
       return response.choices[0].message.content || '';
     } catch (error) {

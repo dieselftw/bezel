@@ -3,7 +3,7 @@ import { BaseAdapter } from '../adapters/base.adapter';
 import { LLMResponse } from '../types/response.types';
 import { validateSchema } from '../utils/validation';
 
-export class StructuredLLM {
+export class Bezel {
   private adapter: BaseAdapter;
 
   constructor(adapter: BaseAdapter) {

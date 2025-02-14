@@ -1,4 +1,4 @@
-import { StructuredLLM, GroqAdapter } from '../src';
+import { Bezel, GroqAdapter } from '../src';
 import { z } from 'zod';
 import dotenv from 'dotenv'
 
@@ -12,16 +12,16 @@ async function main() {
     skills: z.array(z.string())
   });
 
-  // 2. Initialize adapter and structured LLM
+  // 2. Initialize adapter and Bezel
   const adapter = new GroqAdapter(process.env.GROQ_API_KEY || '- YOUR KEY HERE -', {
     model: "llama3-8b-8192"
   });
 
-  const llm = new StructuredLLM(adapter);
+  const llm = new Bezel(adapter);
 
   // 3. Extract structured data
   const result = await llm.extract(
-    'John is a programmer. He is 30 years old. He likes Python and Javascript but only knows PHP',
+    'He is 30 years old. He likes Python and Javascript but only knows PHP',
     personSchema
   );
 
