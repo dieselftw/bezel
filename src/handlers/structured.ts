@@ -20,7 +20,7 @@ export class Bezel {
     
     return {
       data,
-      raw: response
+      raw: response,
     };
   }
 

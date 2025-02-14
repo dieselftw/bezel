@@ -1,6 +1,5 @@
 export interface LLMConfig {
-    model: string;
-    maxRetries?: number;
-    temperature?: number;
-  }
-  
+  model: string;
+  maxRetries?: number;
+  temperature?: number;
+}
