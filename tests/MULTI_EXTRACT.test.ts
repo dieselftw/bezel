@@ -18,17 +18,25 @@ async function main() {
   // 2. Initialize adapter and Bezel
   const adapter = new GroqAdapter(process.env.GROQ_API_KEY || '- YOUR KEY HERE -', {
     model: "llama3-8b-8192",
+    maxRetries: 1,
   });
 
   const llm = new Bezel(adapter);
 
   // 3. Extract structured data - now result.data will be typed as Person
   const result = await llm.extract<Person>(
-    'Troll post that does not contain any information lmao',
+    'John and Tim are 20 years old. Both are good at JavaScript but Tim is also good at Rust and SQL.',
     personSchema
   );
 
   // result.data is now typed as Person
+  /*
+    [
+      { name: 'John', age: 20, skills: [ 'JavaScript' ] },
+      { name: 'Tim', age: 20, skills: [ 'JavaScript', 'Rust', 'SQL' ] }
+    ]
+  */
+  
   console.log(result.data);
 }
 
