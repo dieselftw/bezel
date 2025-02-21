@@ -16,6 +16,7 @@ export class Bezel {
   ): Promise<LLMResponse<T>> {
     const response = await this.adapter.generate(prompt, schema);
     const content = JSON.parse(response);
+
     const data = await validateSchema(content, schema);
     
     return {

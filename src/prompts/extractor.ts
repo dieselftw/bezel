@@ -5,6 +5,7 @@ export enum Prompt {
                     - Return ONLY valid JSON matching the schema
                     - No explanations or additional text
                     - No additional fields beyond the schema
+                    - If multiple objects are found that match the schema, make SEPARATE objects and convert it to an array. Do not club them into a single object.
 
                     2. Fields:
                     - Never omit required fields
@@ -22,6 +23,9 @@ export enum Prompt {
                     - Ensure booleans are true/false, not strings
                     - Format dates as ISO strings or null
                     - Ensure arrays are always arrays, even if single item
+
+                    6. Conflict Resolution:
+                    - If some fields don't fully match, for example, there are 2 names when only one is requested, provide any one.
 
                     The requested schema will be attached at the END of the prompt.`
 }

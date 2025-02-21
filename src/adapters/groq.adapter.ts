@@ -16,8 +16,8 @@ export class GroqAdapter extends BaseAdapter {
   async generate(prompt: string, schema: ZodSchema): Promise<string> {
     let attempt = 1;
     let delay = 1000;
-    let maxRetries = this.config.maxRetries ?? 1
-
+    let maxRetries = this.config.maxRetries ?? 1;
+    
     while (attempt <= maxRetries) {
       try {
         const convertedSchema = SchemaConverter.zodToString(schema);
@@ -31,13 +31,16 @@ export class GroqAdapter extends BaseAdapter {
             { role: 'user', content: prompt + convertedSchema}
           ],
           temperature: this.config.temperature || 0.1,
-          response_format: { type: 'json_object' }
         });
+        const output = response.choices[0].message.content || '';
 
-        return response.choices[0].message.content || '';
+        console.log('LLM Output:', output);
+        return output;
+        
       } catch (error) {
-        if (attempt === this.config.maxRetries) {
-          throw new Error(`Groq API error: ${error}`);
+        console.log('LLM Error:', error);
+        if (attempt === maxRetries) {
+          throw new Error('Maximum retries exceeded');
         }
         await new Promise(resolve => setTimeout(resolve, delay));
         delay *= 2;
