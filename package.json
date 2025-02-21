@@ -1,14 +1,24 @@
 {
-  "name": "bezel",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "bezel-ai",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dieselftw/bezel"
+  },
+  "keywords": [
+    "LLM",
+    "AI",
+    "structured output",
+    "schema validation"
+  ],
+  "author": "dieselftw",
+  "license": "MIT",
+  "description": "JS framework for typesafe and structured LLM inference.",
   "devDependencies": {
     "@types/node": "^22.13.2",
     "ts-node": "^10.9.2",
@@ -18,8 +28,8 @@
     "@anthropic-ai/sdk": "^0.36.3",
     "@types/xml2js": "^0.4.14",
     "axios": "^1.7.9",
+    "bezel-ai": "^0.1.0",
     "dotenv": "^16.4.7",
-    "groq": "^3.75.0",
     "groq-sdk": "^0.15.0",
     "openai": "^4.84.1",
     "xml2js": "^0.6.2",

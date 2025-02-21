@@ -34,7 +34,6 @@ async function main() {
   /*
     [
       { name: 'John', age: 20, skills: [ 'JavaScript' ] },
-      { name: 'Tim', age: 20, skills: [ 'JavaScript', 'Rust', 'SQL' ] }
     ]
   */
   
