@@ -18,7 +18,7 @@ npm install bezel-ai
 
 ## 🔧 Example
 ```typescript
-import { Bezel, GroqAdapter } from '../src';
+import { Bezel, GroqAdapter } from 'bezel-ai';
 import { z } from 'zod';
 import dotenv from 'dotenv'
 
