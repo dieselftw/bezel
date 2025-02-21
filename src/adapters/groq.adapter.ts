@@ -34,11 +34,9 @@ export class GroqAdapter extends BaseAdapter {
         });
         const output = response.choices[0].message.content || '';
 
-        console.log('LLM Output:', output);
         return output;
         
       } catch (error) {
-        console.log('LLM Error:', error);
         if (attempt === maxRetries) {
           throw new Error('Maximum retries exceeded');
         }
